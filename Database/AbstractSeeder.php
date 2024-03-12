@@ -17,6 +17,8 @@ abstract class AbstractSeeder implements Seeder {
         // PHPのfloatは実際にはdouble型の精度です。
         'float' => 'd',
         'string' => 's',
+        'datw' => 's',
+
     ];
 
     public function __construct(MySQLWrapper $conn) {

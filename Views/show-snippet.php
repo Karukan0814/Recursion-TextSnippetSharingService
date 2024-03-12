@@ -1,26 +1,39 @@
 <?php
-
 use Database\MySQLWrapper;
 
-// データベース接続を初期化します
+// URLクエリパラメータを通じてIDが提供されたかどうかをチェックします。
+$id = $_GET['id'] ?? null;
+if (!$id) {
+    die("No ID provided for part lookup.");
+}
+
+// データベース接続を初期化します。
 $db = new MySQLWrapper();
 
+try {
+    // IDでスニペットを取得するステートメントを準備します。
+    $stmt = $db->prepare("SELECT * FROM computer_parts WHERE id = ?");
+    // i' は整数であることを示します。
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
 
+    $result = $stmt->get_result();
+    $part = $result->fetch_assoc();
+} catch (Exception $e) {
+    die("Error fetching part by ID: " . $e->getMessage());
+}
 
-//スニペットを作成するための初期画面
-
-// phpによる処理をすべき場合は前段に記述
+if (!$part) {
+    print("No part found with ID: $id");
+    exit;
+}
 
 ?>
 <div id="editor" style="width: 100%; height: 80vh; border: 1px solid slategray; position:relative">
     <div id="placeholder" style="position: absolute; top:0; left:0; z-index:1; color:slategray">ここにコードを書いてください</div>
 </div>
 <form id="editorForm" action="register" method="post">
-
-<label for="title">Title:</label>
-<input  id="title" name="title" />
-
-    <input  id="text" name="text" />
+    <input type="hidden" id="code" name="code" />
     <label for="syntax">Code:</label>
     <select id="syntax" name="syntax">
     <option value="html">HTML</option>
@@ -48,7 +61,6 @@ $db = new MySQLWrapper();
         <option value="never">never</option>
 
     </select>
-    <button type="submit">Register</button>
 </form>
 
 
@@ -67,31 +79,9 @@ $db = new MySQLWrapper();
         editor = monaco.editor.create(document.getElementById("editor"), {
             value: "",
             language: "markdown",
-        });
-
-        editor.onDidChangeModelContent(function() {
-
-            // ユーザーがエディターに記入したらプレイスホルダーを消す
-            var placeholder = document.getElementById("placeholder");
-            if (editor.getValue()) {
-                placeholder.style.display = "none";
-            } else {
-                placeholder.style.display = "block";
-            }
-
-                    // 登録フォームにコードを格納する
-                    var codeInput = document.getElementById('text');
-        codeInput.value = editor.getValue();
-
-
+            readOnly: true
         });
 
     });
-    // syntaxセレクトボックスの値が変更されたときにエディタの言語を変更
-    document.getElementById("syntax").addEventListener("change", function() {
-        var selectedLanguage = this.value;
-        if (editor) {
-            monaco.editor.setModelLanguage(editor.getModel(), selectedLanguage);
-        }
-    });
+   
 </script>
