@@ -10,7 +10,8 @@ return [
     '' => function (): HTTPRenderer {
         //初期表示　スニペットリストページ
 
-        //TODO 期限切れのスニペット全てを削除する
+        //期限切れのスニペット全てを削除する
+        DatabaseHelper::deleteAllExpiredSnippets();
 
         // 登録してある全てのスニペットを表示
         $snippets = DatabaseHelper::getAllSnippets();

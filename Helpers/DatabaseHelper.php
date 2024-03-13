@@ -3,6 +3,7 @@
 namespace Helpers;
 
 use Database\MySQLWrapper;
+use DateTime;
 use Exception;
 
 class DatabaseHelper
@@ -34,6 +35,22 @@ class DatabaseHelper
         return $snippet;
     }
     
+    public static function deleteAllExpiredSnippets(){
+        $db = new MySQLWrapper();
+
+        // 現在時刻を取得
+        $now = new DateTime();
+    
+        // 有効期限が現在時刻を過ぎたスニペットを削除
+        $stmt = $db->prepare("DELETE FROM snippets WHERE expire_datetime IS NOT NULL AND expire_datetime < ?");
+        $nowFormat=$now->format('Y-m-d H:i:s');
+        $stmt->bind_param('s', $nowFormat );
+        $stmt->execute();
+    
+        // 削除された行数を返す
+        return $stmt->affected_rows;
+    }
+
     public static function getAllSnippets(): array{
         $db = new MySQLWrapper();
 
