@@ -1,6 +1,8 @@
 <?php
 use Database\MySQLWrapper;
 
+
+
 // URLクエリパラメータを通じてIDが提供されたかどうかをチェックします。
 $uid = $_GET['uid'] ?? null;
 if ($uid ){
@@ -16,14 +18,24 @@ if ($uid ){
         
         $result = $stmt->get_result();
         $snippet = $result->fetch_assoc();
+        if (!$snippet){
+            throw new Exception("this snippet does not exist");
+        }
+
     } catch (Exception $e) {
-        die("Error fetching part by ID: " . $e->getMessage());
+        die("Error fetching snippet by uid: " . $e->getMessage());
     }
+}else{
+    die("uid is necessary." );
+
 }
 
 
 ?>
 <div id="" style="display: flex;  flex-direction: column;">
+
+
+
 <div>id: <?= htmlspecialchars($snippet['uid']) ?></div>
 
     <div>title: <?= htmlspecialchars($snippet['title']) ?></div>

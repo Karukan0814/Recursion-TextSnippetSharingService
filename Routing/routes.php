@@ -42,21 +42,26 @@ return [
 
         // エラーがなかった場合、スニペットをテーブルに登録
         // urlを生成する
-        $currentTime = new DateTime();
-        $timestamp=$currentTime->getTimestamp();
-        $randomNumber = random_int(1, 500);// 安全なランダムな整数を生成
-        $uid=strval($randomNumber).strval($timestamp);
-        $result = DatabaseHelper::insertSnippet($uid,$titleRes["value"],$textRes["value"],$syntaxRes["value"],$expireRes["value"]);
-        // print_r($result);
-        return new HTMLRenderer('show-snippet', ["snippet"=>$result]);
+        try{
+            $currentTime = new DateTime();
+            $timestamp=$currentTime->getTimestamp();
+            $randomNumber = random_int(1, 500);// 安全なランダムな整数を生成
+            $uid=strval($randomNumber).strval($timestamp);
+            $result = DatabaseHelper::insertSnippet($uid,$titleRes["value"],$textRes["value"],$syntaxRes["value"],$expireRes["value"]);
+            // print_r($result);
+
+            throw new Exception("test");
+            return new HTMLRenderer('register-result', ["uid"=>$result["uid"]]);
+        }catch(Exception $e){
+            return new HTMLRenderer('register-result', []);
+
+        }
+      
         
     },
     'show' => function (): HTTPRenderer {
         // 指定されたスニペットの表示ページ
-        // IDの検証
-        $id = ValidationHelper::integer($_GET['uid'] ?? null);
 
-        // $part = DatabaseHelper::getComputerPartById($id);
-        return new HTMLRenderer('show-snippet', ['data' => []]);
+        return new HTMLRenderer('show-snippet', []);
     },
 ];
