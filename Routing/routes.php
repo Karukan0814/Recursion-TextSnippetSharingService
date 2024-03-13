@@ -50,7 +50,6 @@ return [
             $result = DatabaseHelper::insertSnippet($uid,$titleRes["value"],$textRes["value"],$syntaxRes["value"],$expireRes["value"]);
             // print_r($result);
 
-            throw new Exception("test");
             return new HTMLRenderer('register-result', ["uid"=>$result["uid"]]);
         }catch(Exception $e){
             return new HTMLRenderer('register-result', []);
