@@ -9,9 +9,18 @@ $db = new MySQLWrapper();
 
 //スニペットを作成するための初期画面
 
+
+
 // phpによる処理をすべき場合は前段に記述
 
 ?>
+<div>
+    <?php if (!empty($errors)) : ?>
+        <?php foreach ($errors as $error) : ?>
+            <p><?= htmlspecialchars($error); ?></p>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>
 <div id="editor" style="width: 100%; height: 80vh; border: 1px solid slategray; position:relative">
     <div id="placeholder" style="position: absolute; top:0; left:0; z-index:1; color:slategray">ここにコードを書いてください</div>
 </div>
@@ -20,7 +29,7 @@ $db = new MySQLWrapper();
 <label for="title">Title:</label>
 <input  id="title" name="title" />
 
-    <input  id="text" name="text" />
+    <textarea  id="text" name="text" style="display: none;"></textarea>
     <label for="syntax">Code:</label>
     <select id="syntax" name="syntax">
     <option value="html">HTML</option>
@@ -82,7 +91,7 @@ $db = new MySQLWrapper();
                     // 登録フォームにコードを格納する
                     var codeInput = document.getElementById('text');
         codeInput.value = editor.getValue();
-
+console.log(editor.getValue());
 
         });
 

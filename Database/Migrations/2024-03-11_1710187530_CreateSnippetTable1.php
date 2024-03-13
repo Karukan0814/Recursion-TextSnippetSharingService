@@ -10,13 +10,11 @@ class CreateSnippetTable1 implements SchemaMigration
     {
         // マイグレーションロジックをここに追加してください
         return ["CREATE TABLE IF NOT EXISTS snippets (
-            id INT PRIMARY KEY AUTO_INCREMENT,
+            uid VARCHAR(500) PRIMARY KEY,
             title VARCHAR(100),
-
             text VARCHAR(1000),
-            url VARCHAR(500),
             syntax VARCHAR(50),
-            expire_datetime DATETIME,
+            expire_datetime DATETIME NULL,
             created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 

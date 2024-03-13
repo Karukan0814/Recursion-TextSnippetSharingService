@@ -308,15 +308,15 @@ DROP TABLE IF EXISTS `snippets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `snippets` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `cord` varchar(1000) DEFAULT NULL,
-  `url` varchar(500) DEFAULT NULL,
-  `language` varchar(50) DEFAULT NULL,
+  `uid` varchar(500) NOT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `text` varchar(1000) DEFAULT NULL,
+  `syntax` varchar(50) DEFAULT NULL,
   `expire_datetime` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -325,7 +325,7 @@ CREATE TABLE `snippets` (
 
 LOCK TABLES `snippets` WRITE;
 /*!40000 ALTER TABLE `snippets` DISABLE KEYS */;
-INSERT INTO `snippets` VALUES (1,'<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>','58741710205383','html','2024-03-11 18:13:03','2024-03-11 18:03:04','2024-03-11 18:03:04');
+INSERT INTO `snippets` VALUES ('1001710223349','て','<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>','html','2024-03-11 23:12:29','2024-03-11 23:02:29','2024-03-11 23:02:29'),('1081710224114','て','<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>','html','2024-03-11 23:25:14','2024-03-11 23:15:14','2024-03-11 23:15:14'),('1571710223607','て','<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>','html','2024-03-11 23:16:47','2024-03-11 23:06:47','2024-03-11 23:06:47'),('1571710223941','て','<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>','html','2024-03-11 23:22:21','2024-03-11 23:12:21','2024-03-11 23:12:21'),('1801710225377','てｓｔ','<!DOCTYPE html>\r\n<html>\r\n<body>\r\n\r\n<h1>My First Heading</h1>\r\n\r\n<p>My first paragraph.</p>\r\n\r\n</body>\r\n</html>\r\n','html','2024-03-11 23:46:17','2024-03-11 23:36:17','2024-03-11 23:36:17'),('1891710224234','て','<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>','html','2024-03-11 23:27:14','2024-03-11 23:17:14','2024-03-11 23:17:14'),('1891710225482','てｓｔ','<!DOCTYPE html>\r\n<html>\r\n<body>\r\n\r\n<h1>My First Heading</h1>\r\n\r\n<p>My first paragraph.</p>\r\n\r\n</body>\r\n</html>\r\n','html','2024-03-11 23:48:02','2024-03-11 23:38:02','2024-03-11 23:38:02'),('2591710224102','て','<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>','html','2024-03-11 23:25:02','2024-03-11 23:15:02','2024-03-11 23:15:02'),('2871710224061','て','<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>','html','2024-03-11 23:24:21','2024-03-11 23:14:21','2024-03-11 23:14:21'),('311710224275','て','<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>','html','2024-03-11 23:27:55','2024-03-11 23:17:55','2024-03-11 23:17:55'),('661710223868','て','<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>','html','2024-03-11 23:21:08','2024-03-11 23:11:08','2024-03-11 23:11:08'),('681710225249','てｓｔ','<!DOCTYPE html>\r\n<html>\r\n<body>\r\n\r\n<h1>My First Heading</h1>\r\n\r\n<p>My first paragraph.</p>\r\n\r\n</body>\r\n</html>\r\n','html','2024-03-11 23:44:09','2024-03-11 23:34:09','2024-03-11 23:34:09'),('871710223598','て','<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>','html','2024-03-11 23:16:38','2024-03-11 23:06:38','2024-03-11 23:06:38'),('961710224106','て','<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>','html','2024-03-11 23:25:06','2024-03-11 23:15:06','2024-03-11 23:15:06'),('ｄｄ','ｆｓｆｓｄｄ','2681710218898','html','2024-03-11 21:58:18','2024-03-11 21:48:18','2024-03-11 21:48:18'),('てあｔ','<!DOCTYPE html><html><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>','81981710218476','html','2024-03-11 21:51:16','2024-03-11 21:41:16','2024-03-11 21:41:16');
 /*!40000 ALTER TABLE `snippets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -471,4 +471,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-11 18:04:36
+-- Dump completed on 2024-03-12 23:04:42

@@ -7,24 +7,24 @@ use Exception;
 
 class DatabaseHelper
 {
-    public static function insertSnippet($title,$text,  $url,$syntax, $expireDatetime): array {
+    public static function insertSnippet($uid,$title,$text,  $syntax, $expireDatetime): array {
         $db = new MySQLWrapper();
     
         // INSERT文を準備
-        $stmt = $db->prepare("INSERT INTO snippets (title,text, url, syntax, expire_datetime) VALUES (?,?, ?, ?, ?)");
+        $stmt = $db->prepare("INSERT INTO snippets (uid,title,text,  syntax, expire_datetime) VALUES (?,?, ?, ?, ?)");
     
         // パラメータをバインド
-        $stmt->bind_param('sssss',$title, $text, $url, $syntax, $expireDatetime);
+        $stmt->bind_param('sssss', $uid,$title, $text, $syntax, $expireDatetime);
     
         // SQLを実行
         $stmt->execute();
     
-        // 挿入された行のIDを取得
-        $insertedId = $stmt->insert_id;
+        // // 挿入された行のIDを取得
+        // $insertedId = $stmt->insert_id;
     
         // 挿入された行を取得
-        $stmt = $db->prepare("SELECT * FROM snippets WHERE id = ?");
-        $stmt->bind_param('i', $insertedId);
+        $stmt = $db->prepare("SELECT * FROM snippets WHERE uid = ?");
+        $stmt->bind_param('i', $uid);
         $stmt->execute();
         $result = $stmt->get_result();
         $snippet = $result->fetch_assoc();
@@ -34,6 +34,24 @@ class DatabaseHelper
         return $snippet;
     }
     
+    public static function getAllSnippets(): array{
+        $db = new MySQLWrapper();
+
+        $stmt = $db->prepare("SELECT * FROM snippets ORDER BY created_at DESC");
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        $snippets = [];
+        while ($snippet = $result->fetch_assoc()) {
+            $snippets[] = $snippet;
+        }
+    
+        if (!$snippets) {
+            throw new Exception('Could not find snippets in database');
+        }
+    
+        return $snippets;
+    }
     public static function getRandomComputerPart(): array{
         $db = new MySQLWrapper();
 

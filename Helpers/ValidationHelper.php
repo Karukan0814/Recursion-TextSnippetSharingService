@@ -35,6 +35,7 @@ class ValidationHelper
         'tenMin' => 'PT10M',
         'oneHour' => 'PT1H',
         'oneDay' => 'P1D',
+        'never'=>null,
     ];
     public static function integer($value, float $min = -INF, float $max = INF): int
     {
@@ -52,7 +53,6 @@ class ValidationHelper
     public static function validateText($text, int $min = 1, int $max = PHP_INT_MAX)
     {
 
-        print_r($text);
         $error = [];
         $response = [
             "error" => $error,
@@ -105,7 +105,6 @@ class ValidationHelper
         }
 
         // 値がすべてのチェックをパスしたら、そのまま返します。
-        print_r($syntax);
 
         return $response;
     }
@@ -118,19 +117,27 @@ class ValidationHelper
             "value" => $expire
         ];
 
+        
+        if ($expire === "never") {
+            $response["value"] = null; // $expire が "never" の場合、value を null に設定
+            return $response;
+        }
+
         $timeIntervals = self::AVAILABLE_EXPIRE;
         if (!isset($timeIntervals[$expire])) {
             $response["error"][] = "Invalid expire interval";
             return $response; // $syntax がリストに存在しない場合は null を返す
         }
+ 
 
-        $now = new DateTime(); // 現在時刻を取得
-        $intervalSpec = $timeIntervals[$expire]; // 対応する時間を取得
-        $now->add(new DateInterval($intervalSpec)); // 時間を加える
-
-        // print_r($now->format('Y-m-d H:i:s'));
-        $formatedVal=$now->format('Y-m-d H:i:s');
-        $response["value"] =  $formatedVal;
+            $now = new DateTime(); // 現在時刻を取得
+            $intervalSpec = $timeIntervals[$expire]; // 対応する時間を取得
+            $now->add(new DateInterval($intervalSpec)); // 時間を加える
+            
+            // print_r($now->format('Y-m-d H:i:s'));
+            $formatedVal=$now->format('Y-m-d H:i:s');
+            $response["value"] =  $formatedVal;
+        
 
         return $response; // 'YYYY-MM-DD HH:MM:SS'形式で返す
     }
