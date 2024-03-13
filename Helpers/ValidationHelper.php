@@ -61,7 +61,7 @@ class ValidationHelper
 
         // $text が string 型であることを確認
         if (!is_string($text)) {
-            $response["error"][] = "The provided value is not a valid string.";
+            $response["error"][] = "Title / Text: The provided value is not a valid string.";
             return $response;
         }
 
@@ -72,7 +72,7 @@ class ValidationHelper
         if ($length < $min || $length > $max) {
             // throw new \InvalidArgumentException(sprintf("The provided string must be between %d and %d characters in length.", $min, $max));
 
-            $response["error"][] = sprintf("The provided string must be between %d and %d characters in length.", $min, $max);
+            $response["error"][] = sprintf("Title / Text: The provided string must be between %d and %d characters in length.", $min, $max);
             return $response;
         }
 
@@ -93,14 +93,14 @@ class ValidationHelper
         // $syntax が string 型であることを確認
         if (!is_string($syntax)) {
             // throw new \InvalidArgumentException("The provided value is not a valid string.");
-            $response["error"][] = "The provided value is not a valid string.";
+            $response["error"][] = "Syntax: The provided value is not a valid string.";
             return $response;
         }
         // $syntax がリスト内の値と一致するか確認
         if (!array_key_exists($syntax, self::AVAILABLE_SYNTAXES)) {
             // throw new \InvalidArgumentException(sprintf("The provided syntax '%s' is not allowed. Allowed syntaxes are: %s", $syntax, implode(', ', SyntaxOptions::AVAILABLE_SYNTAXES)));
 
-            $response["error"][] = sprintf("The provided syntax '%s' is not allowed. Allowed syntaxes are: %s", $syntax, implode(', ', SyntaxOptions::AVAILABLE_SYNTAXES));
+            $response["error"][] = sprintf("Syntax: The provided syntax '%s' is not allowed. Allowed syntaxes are: %s", $syntax, implode(', ', SyntaxOptions::AVAILABLE_SYNTAXES));
             return $response;
         }
 
@@ -125,7 +125,7 @@ class ValidationHelper
 
         $timeIntervals = self::AVAILABLE_EXPIRE;
         if (!isset($timeIntervals[$expire])) {
-            $response["error"][] = "Invalid expire interval";
+            $response["error"][] = "Expired date: Invalid expire interval";
             return $response; // $syntax がリストに存在しない場合は null を返す
         }
  
