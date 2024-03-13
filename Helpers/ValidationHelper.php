@@ -100,7 +100,7 @@ class ValidationHelper
         if (!array_key_exists($syntax, self::AVAILABLE_SYNTAXES)) {
             // throw new \InvalidArgumentException(sprintf("The provided syntax '%s' is not allowed. Allowed syntaxes are: %s", $syntax, implode(', ', SyntaxOptions::AVAILABLE_SYNTAXES)));
 
-            $response["error"][] = sprintf("Syntax: The provided syntax '%s' is not allowed. Allowed syntaxes are: %s", $syntax, implode(', ', SyntaxOptions::AVAILABLE_SYNTAXES));
+            $response["error"][] = sprintf("Syntax: The provided syntax '%s' is not allowed. Allowed syntaxes are: %s", $syntax, implode(', ', self::AVAILABLE_SYNTAXES));
             return $response;
         }
 
