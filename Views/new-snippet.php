@@ -17,7 +17,7 @@ $db = new MySQLWrapper();
 <div>
     <?php if (!empty($errors)) : ?>
         <?php foreach ($errors as $error) : ?>
-            <p><?= htmlspecialchars($error); ?></p>
+            <div class="alert alert-info"><?= htmlspecialchars($error); ?></div>
         <?php endforeach; ?>
     <?php endif; ?>
 </div>
