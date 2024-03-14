@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-    <title>My Computer Parts Store</title>
+    <title>Text Snippet Sharing Service</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
