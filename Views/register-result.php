@@ -9,7 +9,7 @@
         
         
         // 完全なURLを組み立てる
-        $linkUrl = $protocol . '://' . $host."?uid=". $uid;
+        $linkUrl = $protocol . '://' . $host."/show?uid=". $uid;
 
 ?>
 <div>
