@@ -63,9 +63,7 @@ class DatabaseHelper
             $snippets[] = $snippet;
         }
     
-        if (!$snippets) {
-            throw new Exception('Could not find snippets in database');
-        }
+        
     
         return $snippets;
     }
