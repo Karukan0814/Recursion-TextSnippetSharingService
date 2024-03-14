@@ -18,7 +18,7 @@ return [
         return new HTMLRenderer('list', ['snippets'=>$snippets]);
     },
     'create' => function (): HTTPRenderer {
-        //初期表示　スニペット作成ページ
+        //スニペット作成ページ
         // $part = DatabaseHelper::getRandomComputerPart();
         return new HTMLRenderer('new-snippet', []);
     },
