@@ -20,6 +20,7 @@
 DATABASE_NAME=practice_db
 DATABASE_USER=任意のユーザー名
 DATABASE_USER_PASSWORD=任意のパスワード
+DATABASE_HOST=db
 
 ```
 
